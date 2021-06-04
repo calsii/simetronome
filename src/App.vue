@@ -1,9 +1,9 @@
 <template>
-  <Speed msg="Hello Vue 3 + Vite" />
+  <SpeedPanel />
 </template>
 
 <script setup>
-import Speed from './components/Speed.vue'
+import SpeedPanel from './components/Speed/Panel.vue'
 
 // This starter template is using Vue 3 experimental <script setup> SFCs
 // Check out https://github.com/vuejs/rfcs/blob/script-setup-2/active-rfcs/0000-script-setup.md
@@ -18,7 +18,5 @@ import Speed from './components/Speed.vue'
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  margin-top: 60px;
 }
 </style>
