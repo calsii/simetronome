@@ -21,7 +21,7 @@ const props = defineProps({
 }
 
 .counter-value {
-  font-size: 15rem;
+  font-size: 10rem;
 }
 
 .counter-text {
