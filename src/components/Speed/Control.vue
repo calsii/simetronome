@@ -1,5 +1,5 @@
 <template>
-  <a href="#" :disabled="disabled" @click.prevent="$emit('update')">{{ icon }}</a>
+  <a href="#" :class="{ disabled }" @click.prevent="$emit('update')">{{ icon }}</a>
 </template>
 
 <script setup>
@@ -17,9 +17,5 @@ const emit = defineEmit(['update'])
 a {
   font-size: 3rem;
   text-decoration: none;
-}
-
-a[disabled="true"] {
-  visibility: hidden;
 }
 </style>

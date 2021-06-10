@@ -1,5 +1,7 @@
 <template>
   <div class="wrapper">
+    <Slider @update="bpmValueUpdate" :bpm="bpm" :disabled="switcher.on" />
+
     <div class="panel">
       <Control @update="bpmDown" icon="&#10134" :disabled="switcher.on" />
       <Counter :bpm="bpm" />
@@ -14,11 +16,13 @@
 import { reactive, computed } from 'vue'
 import Control from './Control.vue'
 import Counter from './Counter.vue'
+import Slider from './Slider.vue'
 
 const bpm = reactive({
   value: 85,
   flash: false
 })
+const bpmValueUpdate = value => bpm.value = value
 const bpmUp = () => {
   if (switcher.on) {
     return
@@ -46,11 +50,17 @@ const switcherToggle = () => {
   beeping(switcher)
 }
 
+const beepingEffect = () => {
+  bpm.flash = !bpm.flash
+  // TODO
+  // add sound effect
+}
+
 const beeping = switcher => {
   bpm.flash = false
 
   if (switcher.on) {
-    switcher.timer = window.setInterval(() => bpm.flash = !bpm.flash, 60.0 / bpm.value * 1000.0)
+    switcher.timer = window.setInterval(beepingEffect, 60.0 / bpm.value * 1000.0)
   } else {
     if (switcher.timer) {
       window.clearInterval(switcher.timer)
