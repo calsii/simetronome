@@ -1,6 +1,6 @@
 <template>
-  <div class="counter">
-    <span class="counter-value" :class="{ flash: bpm.flash }">{{ bpm.value }}</span>
+  <div class="counter" :class="{ flash: bpm.flash }">
+    <span class="counter-value">{{ bpm.value }}</span>
     <span class="counter-text">bpm</span>
   </div>
 </template>
@@ -30,5 +30,6 @@ const props = defineProps({
 
 .flash {
   color: palevioletred;
+  text-shadow: #FC0 1px 0 10px;
 }
 </style>

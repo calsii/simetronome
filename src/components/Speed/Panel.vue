@@ -22,7 +22,10 @@ const bpm = reactive({
 const bpmUp = () => bpm.value++
 const bpmDown = () => bpm.value <= 0 ? bpm.value = 0 : bpm.value--
 
-const switcher = reactive({ on: false, timer: null })
+const switcher = reactive({
+  on: false,
+  timer: null
+})
 const switcherIcon = computed(() => switcher.on ? '&#9724' : '&#9654')
 const switcherToggle = () => {
   switcher.on = !switcher.on
@@ -30,11 +33,15 @@ const switcherToggle = () => {
 }
 
 const beeping = switcher => {
+  bpm.flash = false
+
   if (switcher.on) {
     switcher.timer = window.setInterval(() => bpm.flash = !bpm.flash, 60.0 / bpm.value * 1000.0)
   } else {
-    window.clearInterval(switcher.timer)
-    switcher.flash = false
+    if (switcher.timer) {
+      window.clearInterval(switcher.timer)
+      switcher.timer = null
+    }
   }
 }
 </script>
