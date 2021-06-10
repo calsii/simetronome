@@ -1,12 +1,13 @@
 <template>
-  <a href="#" @click.prevent="$emit('update')">{{ icon }}</a>
+  <a href="#" :disabled="disabled" @click.prevent="$emit('update')">{{ icon }}</a>
 </template>
 
 <script setup>
 import { defineProps, defineEmit } from 'vue'
 
 const props = defineProps({
-  icon: String
+  icon: String,
+  disabled: Boolean
 })
 
 const emit = defineEmit(['update'])
@@ -16,5 +17,9 @@ const emit = defineEmit(['update'])
 a {
   font-size: 3rem;
   text-decoration: none;
+}
+
+a[disabled="true"] {
+  visibility: hidden;
 }
 </style>

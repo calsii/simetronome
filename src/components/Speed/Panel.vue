@@ -1,9 +1,9 @@
 <template>
   <div class="wrapper">
     <div class="panel">
-      <Control @update="bpmDown" icon="&#10134" />
+      <Control @update="bpmDown" icon="&#10134" :disabled="switcher.on" />
       <Counter :bpm="bpm" />
-      <Control @update="bpmUp" icon="&#10133" />
+      <Control @update="bpmUp" icon="&#10133" :disabled="switcher.on" />
     </div>
 
     <span class="switch" @click="switcherToggle" v-html="switcherIcon"></span>
@@ -19,8 +19,22 @@ const bpm = reactive({
   value: 85,
   flash: false
 })
-const bpmUp = () => bpm.value++
-const bpmDown = () => bpm.value <= 0 ? bpm.value = 0 : bpm.value--
+const bpmUp = () => {
+  if (switcher.on) {
+    return
+  }
+
+  bpm.value++
+}
+const bpmDown = () => {
+  if (switcher.on) {
+    return
+  } else if (bpm.value <= 0) {
+    bpm.value = 0
+  } else {
+    bpm.value--
+  }
+}
 
 const switcher = reactive({
   on: false,

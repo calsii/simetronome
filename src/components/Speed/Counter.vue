@@ -1,15 +1,31 @@
 <template>
-  <div class="counter" :class="{ flash: bpm.flash }">
+  <div class="counter" :style="flashColor">
     <span class="counter-value">{{ bpm.value }}</span>
     <span class="counter-text">bpm</span>
   </div>
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
+import { defineProps, computed } from 'vue'
 
 const props = defineProps({
   bpm: Object
+})
+
+const colors = ['red', 'green', 'blue']
+const getRandomInt = max => Math.floor(Math.random() * max)
+const getRandomColors = () => (colors[getRandomInt(colors.length)])
+
+const flashColor = computed(() => {
+  if (!props.bpm.flash) {
+    return false
+  }
+
+  const color = getRandomColors()
+  return {
+    color,
+    textShadow: `${color} 5px 1px 10px`
+  }
 })
 </script>
 
@@ -26,10 +42,5 @@ const props = defineProps({
 
 .counter-text {
   font-size: 3rem;
-}
-
-.flash {
-  color: palevioletred;
-  text-shadow: #FC0 1px 0 10px;
 }
 </style>
