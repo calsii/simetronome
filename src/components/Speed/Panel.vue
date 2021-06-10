@@ -75,6 +75,8 @@ const beeping = switcher => {
   display: flex;
   flex-direction: column;
   text-align: center;
+  height: 100vh;
+  justify-content: space-around;
 }
 
 .switch:hover {
