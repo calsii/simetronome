@@ -2,11 +2,11 @@
   <div class="wrapper">
     <div class="panel">
       <Control @update="bpmDown" icon="&#10134" />
-      <Counter :value="bpm.value" />
+      <Counter :bpm="bpm" />
       <Control @update="bpmUp" icon="&#10133" />
     </div>
 
-    <span class="switch" @click="switchToggle" v-html="switchIcon"></span>
+    <span class="switch" @click="switcherToggle" v-html="switcherIcon"></span>
   </div>
 </template>
 
@@ -15,19 +15,26 @@ import { reactive, computed } from 'vue'
 import Control from './Control.vue'
 import Counter from './Counter.vue'
 
-const bpm = reactive({ value: 85 })
+const bpm = reactive({
+  value: 85,
+  flash: false
+})
 const bpmUp = () => bpm.value++
 const bpmDown = () => bpm.value <= 0 ? bpm.value = 0 : bpm.value--
 
-const switchStatus = reactive({ on: false })
-const switchIcon = computed(() => switchStatus.on ? '&#9724' : '&#9654')
-const switchToggle = () => switchStatus.on = !switchStatus.on
+const switcher = reactive({ on: false, timer: null })
+const switcherIcon = computed(() => switcher.on ? '&#9724' : '&#9654')
+const switcherToggle = () => {
+  switcher.on = !switcher.on
+  beeping(switcher)
+}
 
-const beeping = () => {
-  if (switchStatus.on) {
-
+const beeping = switcher => {
+  if (switcher.on) {
+    switcher.timer = window.setInterval(() => bpm.flash = !bpm.flash, 60.0 / bpm.value * 1000.0)
   } else {
-
+    window.clearInterval(switcher.timer)
+    switcher.flash = false
   }
 }
 </script>

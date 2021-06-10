@@ -1,6 +1,6 @@
 <template>
   <div class="counter">
-    <span class="counter-value">{{ value }}</span>
+    <span class="counter-value" :class="{ flash: bpm.flash }">{{ bpm.value }}</span>
     <span class="counter-text">bpm</span>
   </div>
 </template>
@@ -9,7 +9,7 @@
 import { defineProps } from 'vue'
 
 const props = defineProps({
-  value: Number
+  bpm: Object
 })
 </script>
 
@@ -26,5 +26,9 @@ const props = defineProps({
 
 .counter-text {
   font-size: 3rem;
+}
+
+.flash {
+  color: palevioletred;
 }
 </style>
