@@ -1,5 +1,5 @@
 <template>
-  <div class="slider" :class="{ disabled }">
+  <div class="slider" :class="{ hidden }">
     <label id="slider-label" class="slider-label isRight"></label>
     <input
       id="slider-input"
@@ -18,7 +18,7 @@ import { defineProps, defineEmit } from 'vue'
 
 const props = defineProps({
   bpm: Object,
-  disabled: Boolean
+  hidden: Boolean
 })
 
 const emit = defineEmit(['update'])

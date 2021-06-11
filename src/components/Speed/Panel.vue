@@ -1,11 +1,11 @@
 <template>
   <div class="wrapper">
-    <Slider @update="bpmValueUpdate" :bpm="bpm" :disabled="switcher.on" />
+    <Slider @update="bpmValueUpdate" :bpm="bpm" :hidden="switcher.on" />
 
     <div class="panel">
-      <Control @update="bpmDown" icon="&#10134" :disabled="switcher.on" />
+      <Control @update="bpmDown" icon="&#10134" :hidden="switcher.on" />
       <Counter :bpm="bpm" />
-      <Control @update="bpmUp" icon="&#10133" :disabled="switcher.on" />
+      <Control @update="bpmUp" icon="&#10133" :hidden="switcher.on" />
     </div>
 
     <span class="switch" @click="switcherToggle" v-html="switcherIcon"></span>
@@ -13,61 +13,33 @@
 </template>
 
 <script setup>
-import { reactive, computed } from 'vue'
+import { reactive } from 'vue'
 import Control from './Control.vue'
 import Counter from './Counter.vue'
 import Slider from './Slider.vue'
+import useBpm from '@/uses/bpm.js'
+import useSwitcher from '@/uses/switcher.js'
 
 const bpm = reactive({
   value: 85,
   flash: false
 })
-const bpmValueUpdate = value => bpm.value = value
-const bpmUp = () => {
-  if (switcher.on) {
-    return
-  }
-
-  bpm.value++
-}
-const bpmDown = () => {
-  if (switcher.on) {
-    return
-  } else if (bpm.value <= 0) {
-    bpm.value = 0
-  } else {
-    bpm.value--
-  }
-}
 
 const switcher = reactive({
   on: false,
   timer: null
 })
-const switcherIcon = computed(() => switcher.on ? '&#9724' : '&#9654')
-const switcherToggle = () => {
-  switcher.on = !switcher.on
-  beeping(switcher)
-}
 
-const beepingEffect = () => {
-  bpm.flash = !bpm.flash
-  // TODO
-  // add sound effect
-}
+const {
+  bpmValueUpdate,
+  bpmUp,
+  bpmDown
+} = useBpm({ bpm, switcher })
 
-const beeping = switcher => {
-  bpm.flash = false
-
-  if (switcher.on) {
-    switcher.timer = window.setInterval(beepingEffect, 60.0 / bpm.value * 1000.0)
-  } else {
-    if (switcher.timer) {
-      window.clearInterval(switcher.timer)
-      switcher.timer = null
-    }
-  }
-}
+const {
+  switcherIcon,
+  switcherToggle
+} = useSwitcher({ bpm, switcher })
 </script>
 
 <style scoped>

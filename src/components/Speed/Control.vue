@@ -1,5 +1,5 @@
 <template>
-  <a href="#" :class="{ disabled }" @click.prevent="$emit('update')">{{ icon }}</a>
+  <a href="#" :class="{ hidden }" @click.prevent="$emit('update')">{{ icon }}</a>
 </template>
 
 <script setup>
@@ -7,7 +7,7 @@ import { defineProps, defineEmit } from 'vue'
 
 const props = defineProps({
   icon: String,
-  disabled: Boolean
+  hidden: Boolean
 })
 
 const emit = defineEmit(['update'])
