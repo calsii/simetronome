@@ -34,7 +34,6 @@ const emit = defineEmit(['update'])
   position: relative;
   display: inline-block;
   margin: -4px 6px 0 0;
-  margin-top: 1rem;
 }
 
 

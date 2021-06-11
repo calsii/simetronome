@@ -41,7 +41,7 @@ const {
   flex-direction: column;
   text-align: center;
   height: 100vh;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .switch:hover {
@@ -53,7 +53,7 @@ const {
 }
 
 .panel {
-  padding: 2rem;
+  padding: 0 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
