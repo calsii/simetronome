@@ -3,10 +3,20 @@
 </template>
 
 <script setup>
-  import SpeedPanel from './components/Speed/Panel.vue'
-
 // This starter template is using Vue 3 experimental <script setup> SFCs
 // Check out https://github.com/vuejs/rfcs/blob/script-setup-2/active-rfcs/0000-script-setup.md
+import SpeedPanel from './components/Speed/Panel.vue'
+import { reactive, provide } from 'vue'
+
+provide('bpm', reactive({
+  value: 85,
+  flash: false
+}))
+
+provide('switcher', reactive({
+  on: false,
+  timer: null
+}))
 </script>
 
 <style>

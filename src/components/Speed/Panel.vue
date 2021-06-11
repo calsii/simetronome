@@ -1,10 +1,10 @@
 <template>
   <div class="wrapper">
-    <Slider @update="bpmValueUpdate" :bpm="bpm" :hidden="switcher.on" />
+    <Slider @update="bpmValueUpdate" :hidden="switcher.on" />
 
     <div class="panel">
       <Control @update="bpmDown" icon="&#10134" :hidden="switcher.on" />
-      <Counter :bpm="bpm" />
+      <Counter />
       <Control @update="bpmUp" icon="&#10133" :hidden="switcher.on" />
     </div>
 
@@ -13,22 +13,15 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { inject } from 'vue'
 import Control from './Control.vue'
 import Counter from './Counter.vue'
 import Slider from './Slider.vue'
 import useBpm from '@/uses/bpm.js'
 import useSwitcher from '@/uses/switcher.js'
 
-const bpm = reactive({
-  value: 85,
-  flash: false
-})
-
-const switcher = reactive({
-  on: false,
-  timer: null
-})
+const bpm = inject('bpm')
+const switcher = inject('switcher')
 
 const {
   bpmValueUpdate,

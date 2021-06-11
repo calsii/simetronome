@@ -6,18 +6,16 @@
 </template>
 
 <script setup>
-import { defineProps, computed } from 'vue'
+import { inject, computed } from 'vue'
 
-const props = defineProps({
-  bpm: Object
-})
+const bpm = inject('bpm')
 
 const colors = ['red', 'green', 'blue']
 const getRandomInt = max => Math.floor(Math.random() * max)
 const getRandomColors = () => (colors[getRandomInt(colors.length)])
 
 const flashColor = computed(() => {
-  if (!props.bpm.flash) {
+  if (!bpm.flash) {
     return false
   }
 

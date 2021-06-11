@@ -14,10 +14,11 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmit } from 'vue'
+import { inject, defineEmit } from 'vue'
+
+const bpm = inject('bpm')
 
 const props = defineProps({
-  bpm: Object,
   hidden: Boolean
 })
 
