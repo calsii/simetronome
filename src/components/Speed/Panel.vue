@@ -53,7 +53,7 @@ const {
 }
 
 .panel {
-  padding: 2.5rem;
+  padding: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
