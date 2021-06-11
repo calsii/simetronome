@@ -1,5 +1,5 @@
 import { reactive, computed } from 'vue'
-import sound from '@/assets/mixkit-positive-interface-beep-221.wav'
+import sound from '@/assets/mixkit-appliance-ready-beep-1076.wav'
 
 const audio = new window.Audio(sound)
 
